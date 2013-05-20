@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   Copyright 2013 Patrick Kelchner
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<s:schema xmlns:s="http://www.w3.org/2001/XMLSchema">
+	<s:element name="testsuites" type="TestSuite" />
+	<s:element name="testsuite" type="TestSuite" />
+
+	<s:complexType name="TestSuite">
+		<s:sequence>
+			<s:element name="properties" type="Properties" minOccurs="0" />
+			
+			<s:choice minOccurs="0" maxOccurs="unbounded">
+				<s:element name="testsuite" type="TestSuite" />
+				<s:element name="testcase" type="TestCase" />
+			</s:choice>
+		</s:sequence>
+
+		<s:attribute name="time" type="s:decimal" />
+		<s:attribute name="tests" type="s:int" />
+		<s:attribute name="failures" type="s:int" />
+		<s:attribute name="errors" type="s:int" />
+		
+		<s:attribute name="classname" type="s:string" />
+		<s:attribute name="name" type="s:string" use="required" />
+	</s:complexType>
+
+	<s:complexType name="TestCase">
+		<s:all>
+			<s:element name="failure" type="AttributedOutput" minOccurs="0" />
+			<s:element name="error" type="AttributedOutput" minOccurs="0" />
+		</s:all>
+		
+		<s:attribute name="time" type="s:decimal" />
+		<s:attribute name="classname" type="s:string" />
+		<s:attribute name="name" type="s:string" use="required" />
+	</s:complexType>
+
+	<s:complexType name="Properties">
+		<s:sequence>
+			<s:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded" />
+		</s:sequence>
+	</s:complexType>
+
+	<s:complexType name="Property">
+		<s:attribute name="name" type="s:string" use="required" />
+		<s:attribute name="value" type="s:string" use="required" />
+	</s:complexType>
+
+	<s:complexType name="AttributedOutput">
+		<s:simpleContent>
+			<s:extension base="UnattributedOutput">
+				<s:attribute name="type" type="s:string" />
+				<s:attribute name="message" type="s:string" />
+			</s:extension>
+		</s:simpleContent>
+	</s:complexType>
+
+	<s:simpleType name="UnattributedOutput">
+		<s:restriction base="s:string">
+			<s:whiteSpace value="preserve" />
+		</s:restriction>
+	</s:simpleType>
+</s:schema>

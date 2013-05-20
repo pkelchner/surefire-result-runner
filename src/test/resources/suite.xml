@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="aSuite">
+	<properties>
+	</properties>
+	<testsuite name="subSuite">
+		<testcase classname="de.kelchner.surefire.junit.TestA" name="case1">
+		</testcase>
+		<testcase classname="de.kelchner.surefire.junit.TestB" name="case2">
+		</testcase>
+		<testsuite name="subSubSuite">
+			<testcase classname="de.kelchner.surefire.junit.TestC" name="case3">
+			</testcase>
+		</testsuite>
+		<testcase classname="de.kelchner.surefire.junit.TestA" name="case4">
+		</testcase>
+		<testcase classname="de.kelchner.surefire.junit.TestB" name="case4">
+		</testcase>
+	</testsuite>
+</testsuite>
